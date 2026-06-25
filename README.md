@@ -1,25 +1,52 @@
-# Coin Toss Simulator
+# Coin Toss Simulation Engine
 
-This is a simple Python program that simulates tossing a coin 10 times. Each toss randomly results in either "Heads" or "Tails," and the results are printed to the console. It’s a basic demonstration of randomness and loops in Python.
+A Python-based probabilistic simulation engine for coin toss sequences. 
+Runs a configurable number of tosses, tracks outcome frequency, and 
+generates a structured post-session report including streak analysis.
 
 ## Features
 
-- Simulates 10 coin tosses
-- Uses `random.randint()` to generate outcomes
-- Outputs the result of each toss with its toss number
-- Uses constants for cleaner and more readable code
+- Simulates any number of coin tosses via a configurable constant
+- Tracks heads and tails frequency with percentage breakdown
+- Identifies the longest consecutive streak and the face it belongs to
+- Full toss log maintained across the session
+- Input validation handles NaN, infinite values, and zero counts
+- Optional RNG seeding for reproducible simulation runs
 
 ## How to Run
 
-1. Make sure Python is installed on your computer.
-2. Save the file as `coin_toss_simulator.py`
-3. Open your terminal or command prompt.
-4. Navigate to the folder where the file is saved.
-5. Run the program
+```bash
+python CoinToss.py
+```
 
-## What I Learned
+No external dependencies. Requires Python 3 with a standard installation.
 
-- How to use `random.randint()` to simulate chance-based events
-- Using constants to improve code readability and maintainability
-- Controlling program flow with loops
-- Printing formatted output using `f-strings`
+## Sample Output
+
+```
+coin toss simulator
+
+  toss 1: heads
+  toss 2: tails
+  toss 3: heads
+  ...
+
+  summary
+  --------------------
+  heads: 6 (60.0%)
+  tails: 4 (40.0%)
+  longest streak: 3x heads
+```
+
+## Technical Highlights
+
+- `Face` enum replaces magic integers for clean outcome representation
+- Weighted distribution pipeline built via `functools.reduce` even for a fair coin
+- `TossResult` dataclass captures full state of every individual toss
+- `SimulationReport` auto-computes frequency, percentages, and streak on initialization
+- `CoinEngine` maintains an isolated RNG and full session log
+- Rendering logic fully separated from simulation logic
+
+## Tech Stack
+
+Python 3 | dataclasses | enums | functools | collections
